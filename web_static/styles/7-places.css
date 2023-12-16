@@ -13,7 +13,7 @@
 	justify-content: center;
 }
 
-.places ul li article {
+article {
 	width: 390px;
 	padding: 20px;
 	margin: 20px;
@@ -23,6 +23,6 @@
 	justify-content: center;
 }
 
-.places ul li article h2 {
+article h2 {
 	font-size: 30px;
 }
