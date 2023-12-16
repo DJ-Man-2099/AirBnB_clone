@@ -1,15 +1,12 @@
 #!/usr/bin/python3
-"""
-File Storage Module
-"""
+"""file serialization-deserialization"""
 import json
-import os
-import sys
+from os.path import exists
 
 
-class FileStorage:
+class FileStorage():
     """
-    serializes instances to a JSON file and deserializes JSON file to instances
+    class to serialization-deserialization data of each instanse
     """
 
     __file_path = "file.json"
@@ -17,7 +14,7 @@ class FileStorage:
 
     def all(self):
         """
-        returns the dictionary __objects
+        return the dict of all data
         """
         return self.__objects
 
@@ -25,33 +22,39 @@ class FileStorage:
         """
         sets in __objects the obj with key <obj class name>.id
         """
-        self.__objects[f"{type(obj).__name__}.{obj.id}"] = obj
+        key = "{}.{}".format(type(obj).__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
-        """
-        serializes __objects to the JSON file (path: __file_path)
-        """
-        file_objects = {}
+        dict_items = {}
         for key, value in self.__objects.items():
-            file_objects[key] = value.to_dict()
-        json_dumps = json.dumps(file_objects)
-        with open(self.__file_path, "w") as file:
-            file.write(json_dumps)
+            dict_items[key] = value.to_dict()
+        with open(self.__file_path, 'w', encoding="utf-8") as file:
+            json.dump(dict_items, file)
 
     def reload(self):
         """
         deserializes the JSON file to __objects
         """
-        if os.path.exists(self.__file_path):
-            file_contents = ""
-            with open(self.__file_path, "r") as file:
-                from models.base_model import BaseModel
-                object_dict = {
-                    "BaseModel": BaseModel
-                }
-                file_contents = file.read()
-                json_loads = json.loads(file_contents)
-                self.__objects = {}
-                for key, value in json_loads.items():
-                    object_init = object_dict[value["__class__"]]
-                    self.__objects[key] = object_init(**value)
+        if exists(self.__file_path):
+            from models.base_model import BaseModel
+            from models.user import User
+            from models.state import State
+            from models.city import City
+            from models.amenity import Amenity
+            from models.place import Place
+            from models.review import Review
+            class_dict = {
+                "BaseModel": BaseModel,
+                "User": User,
+                "State": State,
+                "City": City,
+                "Amenity": Amenity,
+                "Place": Place,
+                "Review": Review
+            }
+            with open(self.__file_path, 'r') as file:
+                dict_file = json.load(file)
+                for key, value in dict_file.items():
+                    needed_class = value["__class__"]
+                    self.__objects[key] = class_dict[needed_class](**value)

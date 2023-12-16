@@ -1,8 +1,9 @@
 #!/usr/bin/python3
+"""test the basemodel class"""
 from datetime import datetime
 import unittest
 from models.base_model import BaseModel, __doc__
-from help_functions.helpers import Helpers
+from help_functions.test_helpers import Helpers
 
 
 class TestBaseModel(unittest.TestCase):
@@ -59,7 +60,8 @@ class TestBaseModel(unittest.TestCase):
             'created_at': str(my_model.created_at.isoformat()),
             'updated_at': str(my_model.updated_at.isoformat()),
             "name": "My First Model",
-            "my_number": 89
+            "my_number": 89,
+            "__class__": "BaseModel"
         }
         helpers.stdout(lambda: print(my_model_json),
                        f"{my_dict}\n")
@@ -75,5 +77,6 @@ class TestBaseModel(unittest.TestCase):
         for key in my_model_json.keys():
             helpers.stdout(lambda: print("\t{}: ({}) - {}"
                                          .format(key,
-                                                 type(my_model_json[key]), my_model_json[key])),
+                                                 type(my_model_json[key]),
+                                                 my_model_json[key])),
                            f"\t{key}: {my_detailed_dict[key]}\n")
