@@ -15,6 +15,7 @@
     display: flex;
     flex-flow: column;
     justify-content: center;
+    padding-left: 50px;
 }
 
 .locations h3,
