@@ -103,15 +103,23 @@ article h2 {
 }
 
 article .amenities {
+	width: 100%;
 	margin-top: 40px;
 }
 
-.amenities h2 {
+article .amenities h2 {
+	height: fit-content;
 	font-size: 16px;
+	padding-bottom: 10px;
 	border-bottom: 1px solid #DDDDDD;
 }
 
+article .amenities ul {
+	padding-left: 0;
+}
+
 .amenity {
+	width: 100%;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -121,9 +129,9 @@ article .amenities {
 .pet,
 .wifi {
 	height: 50px;
-	width: 75px;
-	margin: 0 10px;
+	width: 70px;
 	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .tv {
@@ -136,4 +144,32 @@ article .amenities {
 
 .wifi {
 	background-image: url('../images/icon_wifi.png');
+}
+
+.reviews {
+	margin-top: 40px;
+	width: 100%;
+}
+
+article .reviews h2 {
+	height: fit-content;
+	font-size: 16px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+article .reviews ul {
+	padding-left: 0;
+	justify-content: flex-start;
+}
+
+article .reviews ul li h3 {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0;
+}
+
+article .reviews ul li p {
+	font-size: 12px;
+	margin: 5px 0;
 }
