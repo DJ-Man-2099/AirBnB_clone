@@ -58,6 +58,7 @@
 }
 
 .popover {
+    z-index: 20;
     display: none;
     position: absolute;
     list-style: none;
